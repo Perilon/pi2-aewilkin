@@ -6,9 +6,222 @@
     <vendor/>
   <types>
     <typeDescription>
-      <name>score</name>
-      <description>the score</description>
+      <name>AnswerAnno</name>
+      <description>A structure for each line that is an answer to a question</description>
+      <supertypeName>LineAnno</supertypeName>
+      <features>
+        <featureDescription>
+          <name>AnswerNumber</name>
+          <description>Indicates which number answer a particular AnswerAnno is</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>IsCorrectAnswer</name>
+          <description>Indicates whether a particular AnswerAnno is a correct (True) or incorrect (False) answer</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>QuestionAnno</name>
+      <description>A structure for each line that is a question</description>
+      <supertypeName>LineAnno</supertypeName>
+      </typeDescription>
+    <typeDescription>
+      <name>LineAnno</name>
+      <description>A structure for each line in an input .txt file, to be delineated by newline characters, of which subtypes are either QuestionAnno or AnswerAnno</description>
+      <supertypeName>DocumentAnno</supertypeName>
+      <features>
+        <featureDescription>
+          <name>LineNumber</name>
+          <description>Indicates which line number of the input .txt document a particular LineAnno is</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>DocumentAnno</name>
+      <description>Contains all the text from an input .txt file, from which LineAnno types are created</description>
+      <supertypeName>AnnoPlus</supertypeName>
+      </typeDescription>
+    <typeDescription>
+      <name>AnswerAnnoTokenized</name>
+      <description>Has the feature StringArray, which contains the tokens of the answer in question</description>
+      <supertypeName>AnswerAnno</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>A string array of the tokens of a given answer sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>QuestionAnnoTokenized</name>
+      <description>Has the feature StringArray, which contains the tokens of the question in question</description>
+      <supertypeName>QuestionAnno</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>A string array of the tokens of a given question sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>AnswerOneGrams</name>
+      <description>Contains in the feature StringArray the 1-grams of a given answer sentence</description>
+      <supertypeName>AnswerAnnoTokenized</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>Contains the 1-grams of a given answer sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>AnswerTwoGrams</name>
+      <description>Contains in the feature StringArray the 2-grams of a given answer sentence</description>
+      <supertypeName>AnswerAnnoTokenized</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>Contains the 2-grams of a given answer sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>AnswerThreeGrams</name>
+      <description>Contains in the feature StringArray the 3-grams of a given answer sentence</description>
+      <supertypeName>AnswerAnnoTokenized</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>Contains the 3-grams of a given answer sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>QuestionOneGrams</name>
+      <description>Contains in the feature StringArray the 1-grams of a given question sentence</description>
+      <supertypeName>QuestionAnnoTokenized</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>Contains the 1-grams of a given question sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>QuestionTwoGrams</name>
+      <description>Contains in the feature StringArray the 2-grams of a given question sentence</description>
+      <supertypeName>QuestionAnnoTokenized</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>Contains the 2-grams of a given question sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>QuestionThreeGrams</name>
+      <description>Contains in the feature StringArray the 3-grams of a given question sentence</description>
+      <supertypeName>QuestionAnnoTokenized</supertypeName>
+      <features>
+        <featureDescription>
+          <name>StringArray</name>
+          <description>Contains the 3-grams of a given question sentence</description>
+          <rangeTypeName>uima.cas.StringArray</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>AnswerScorer</name>
+      <description>Scores an answer using n-gram string arrays</description>
+      <supertypeName>AnswerAnno</supertypeName>
+      <features>
+        <featureDescription>
+          <name>Score</name>
+          <description>The score for a given answer sentence, output by the scorer type that assigns a score based on n-gram similarity between a question sentence and an answer sentence</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+        </features>
+    </typeDescription>
+    <typeDescription>
+      <name>Sorter</name>
+      <description>Sorts AnswerAnnos according to their scores, and calculates precision</description>
       <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>SortedAnswers</name>
+          <description>A list of the SentenceAnnos, sorted by score</description>
+          <rangeTypeName>uima.cas.StringList</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>Confidence</name>
+          <description>The confidence of the sorted string list</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>ComponentName</name>
+          <description>The name of a component that produces the sorted string list</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>AnswerActual</name>
+      <description>Contains the sentence part of an AnswerAnno, the part which will be tokenized and turned into n-grams</description>
+      <supertypeName>AnswerAnno</supertypeName>
+      </typeDescription>
+    <typeDescription>
+      <name>QuestionActual</name>
+      <description>Contains the actual sentence part of a QuestionAnno, the part which will be tokenized and turned into n-grams</description>
+      <supertypeName>QuestionAnno</supertypeName>
+      </typeDescription>
+    <typeDescription>
+      <name>PrecisionCalculator</name>
+      <description>Contains feature PrecisionValue that represents precision at N</description>
+      <supertypeName>Sorter</supertypeName>
+      <features>
+        <featureDescription>
+          <name>Precision</name>
+          <description>The value for precision over the AnswerAnnos—out of all the answer sentences receiving a score (which should be all of them, right?), how many of the N correct answers (as obtained from the gold standard data given) are in the top N results after sorting?</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      <featureDescription>
+          <name>ComponentName</name>
+          <description>The name of a component that produces the precision score</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>Confidence</name>
+          <description>The confidence of the precision score</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  <typeDescription>
+      <name>AnnoPlus</name>
+      <description>Contains features for "Confidence" and "ComponentName," which are features that the homework assignment informs us every annotation should have.  So all annotation types in my structure inherit from this type.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>Confidence</name>
+          <description>The component's confidence score assigned to the annotation</description>
+          <rangeTypeName>uima.cas.Float</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>ComponentName</name>
+          <description>The name of a component that produces the annotation</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
     </typeDescription>
   </types>
 </typeSystemDescription>
